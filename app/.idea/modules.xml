@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1392205525/Bluetooth_Messaging_App.iml" filepath="$PROJECT_DIR$/.idea/modules/1392205525/Bluetooth_Messaging_App.iml" group="Bluetooth_Messaging_App" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app.iml" filepath="$PROJECT_DIR$/.idea/modules/app.iml" group="Bluetooth Messaging App/app" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1392205525/Bluetooth_Messaging_App.iml" filepath="$PROJECT_DIR$/.idea/modules/1392205525/Bluetooth_Messaging_App.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Bluetooth_Messaging_App.app.iml" filepath="$PROJECT_DIR$/.idea/modules/Bluetooth_Messaging_App.app.iml" />
     </modules>
   </component>
 </project>

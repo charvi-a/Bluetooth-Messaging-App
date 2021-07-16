@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "482361075291",
+    "firebase_url": "https://bluetooth-messaging-fc33b-default-rtdb.firebaseio.com",
+    "project_id": "bluetooth-messaging-fc33b",
+    "storage_bucket": "bluetooth-messaging-fc33b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:482361075291:android:0af4e12b679638570c017e",
+        "android_client_info": {
+          "package_name": "com.example.bluetoothmessagingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "482361075291-lisrjj44ojprmgsu27eforfrbu2iobn5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4Ira-HlNJBcPTaRCdAGmbGNjZFIvW7So"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "482361075291-lisrjj44ojprmgsu27eforfrbu2iobn5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

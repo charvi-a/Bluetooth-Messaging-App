@@ -13,8 +13,10 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Set;
@@ -31,13 +33,14 @@ public class SearchDevices extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String ac = intent.getAction();
+
             //if we have found a device then we add it to the adapter
             if (ac.equals(BluetoothDevice.ACTION_FOUND)) {
                 BluetoothDevice dev = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
 
                 //check if the device found is not a bonded device, if it is not then add it to available devices
                 if (BluetoothDevice.BOND_BONDED != dev.getBondState()) {
-                    available_devices_list.add(dev.getName() + "/n");
+                    available_devices_list.add(dev.getName() + System.getProperty("line.separator") + dev.getAddress());
                 }
             }
             //if the process of searching for devices is done
@@ -46,9 +49,8 @@ public class SearchDevices extends AppCompatActivity {
                     available_devices_list.add("No devices found.");
                 }
                 else{
-                    Toast.makeText(context, "Click the device to start messaging", Toast.LENGTH_SHORT);
+                    Toast.makeText(context, "Click the device to start messaging", Toast.LENGTH_SHORT).show();
                 }
-
             }
         }
     };
@@ -57,10 +59,10 @@ public class SearchDevices extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_devices);
-        context = getApplicationContext();
+        context = this;
 
-        bonded_devices_list = new ArrayAdapter(context,R.layout.device_list);
-        available_devices_list = new ArrayAdapter(context, R.layout.device_list);
+        bonded_devices_list = new ArrayAdapter<String>(context,R.layout.device_list);
+        available_devices_list = new ArrayAdapter<String>(context, R.layout.device_list);
 
         bonded_devices = findViewById(R.id.list_bonded_devices);
         available_devices = findViewById(R.id.list_available_devices);
@@ -68,13 +70,37 @@ public class SearchDevices extends AppCompatActivity {
         bonded_devices.setAdapter(bonded_devices_list);
         available_devices.setAdapter(available_devices_list);
 
+        bonded_devices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String details = ((TextView) view).getText().toString();
+                String address = details.substring(details.length() - 17);
+
+                Intent in = new Intent();
+                in.putExtra("deviceAddress",address);
+                in.putExtra("state",1);
+                setResult(RESULT_OK,in);
+                finish();
+            }
+        });
+        available_devices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String dev = ((TextView) view).getText().toString();
+
+                Intent in = new Intent();
+                in.putExtra("device",dev);
+                setResult(RESULT_OK,in);
+                finish();
+            }
+        });
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         Set<BluetoothDevice> devices = bluetoothAdapter.getBondedDevices();
 
         //check if there are bonded devices
         if (devices.size() > 0){
             for (BluetoothDevice dev : devices){
-                bonded_devices_list.add(dev.getName() + "/n");
+                bonded_devices_list.add(dev.getName() + System.getProperty("line.separator") + dev.getAddress());
             }
 
         }
@@ -113,7 +139,7 @@ public class SearchDevices extends AppCompatActivity {
 
         available_devices_list.clear();
 
-        Toast.makeText(context, "Scanning for devices...", Toast.LENGTH_SHORT);
+        Toast.makeText(context, "Scanning for devices...", Toast.LENGTH_SHORT).show();
         if(bluetoothAdapter.isDiscovering()){
             bluetoothAdapter.cancelDiscovery();
         }

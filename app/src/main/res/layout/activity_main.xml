@@ -7,32 +7,65 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/bluetooth_enable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="87dp"
+        android:layout_marginTop="58dp"
         android:clickable="true"
         android:text="ENABLE BLUETOOTH"
-        android:textColor="@color/colorPrimaryDark"
-        android:id="@+id/bluetooth_enable"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="156dp"
-        android:clickable="true"
-        android:text="SEARCH DEVICES TO CONNECT"
-        android:textColor="@color/colorPrimaryDark"
-        android:id="@+id/connect_device"/>
+        android:textColor="@color/colorPrimaryDark" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="30dp"
-        android:layout_marginTop="250dp"/>
-    
+        android:layout_marginTop="40dp"
+        android:visibility="invisible"
+        android:id="@+id/list_messages"
+        android:layout_marginBottom="100dp" />
+
+    <Button
+        android:id="@+id/connect_device"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="124dp"
+        android:clickable="true"
+        android:text="SEARCH DEVICES TO CONNECT"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <EditText
+        android:id="@+id/messagesEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="-6dp"
+        android:layout_marginLeft="-6dp"
+        android:layout_marginEnd="3dp"
+        android:layout_marginBottom="57dp"
+        android:hint="Type your message here"
+        android:visibility="invisible"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="3dp" />
+
+    <ImageButton
+        android:id="@+id/imageButtonSend"
+        android:layout_width="81dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="57dp"
+        android:background="#00FE94"
+        android:visibility="invisible"
+        app:srcCompat="@android:drawable/ic_menu_send" />
+
 
 </RelativeLayout>
