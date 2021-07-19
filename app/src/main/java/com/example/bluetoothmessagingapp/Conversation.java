@@ -96,6 +96,7 @@ public class Conversation extends AppCompatActivity{
         }
         connectThread1.write(msg_buffer);
     }
+    
     //server side
     //we need to accept the incoming connection requests
     private class Accept extends Thread{
@@ -133,7 +134,6 @@ public class Conversation extends AppCompatActivity{
                 else if (state == NONE || state == CONNECTED){
                     try{
                         socket.close();
-
                     }catch (IOException e){
                         Log.e("AcceptThread","Unable to close server socket: "+ e.toString());
                     }
@@ -184,7 +184,7 @@ public class Conversation extends AppCompatActivity{
                 Log.e("ThreadConnect", "Unable to connect to device: " + e.toString());
                 //then we close the connection
                 try {
-                    //change mPort to 1 since when it is -1 is does not work for android >= 4.2
+                    //change soc.mPort to 1 since when it is -1 is does not work for android >= 4.2
                     soc = (BluetoothSocket) dev.getClass().getMethod("createRfcommSocket", new Class[]{int.class}).invoke(dev, 1);
                     soc.connect();
                 } catch (Exception e2) {
@@ -252,8 +252,6 @@ public class Conversation extends AppCompatActivity{
                 Log.e("SendReceive","Unable to close socket: "+ e.toString());
             }
         }
-
-
     }
 
 
@@ -305,5 +303,4 @@ public class Conversation extends AppCompatActivity{
         //start listening again
         Conversation.this.start();
     }
-
 }
