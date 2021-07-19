@@ -36,7 +36,6 @@ public class SearchDevices extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String ac = intent.getAction();
-
             //if we have found a device then we add it to the adapter
             if (ac.equals(BluetoothDevice.ACTION_FOUND)) {
                 BluetoothDevice dev = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
@@ -87,7 +86,7 @@ public class SearchDevices extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String details = ((TextView) view).getText().toString();
                 String address = details.substring(details.length() - 17);
-
+                
                 Intent in = new Intent();
                 in.putExtra("deviceAddress",address);
                 in.putExtra("state",1);
@@ -118,7 +117,6 @@ public class SearchDevices extends AppCompatActivity {
         else{
             bonded_devices_list.add("No paired devices.");
         }
-
         //IntentFilter is used to match against actions in an intent
         IntentFilter intent1 = new IntentFilter(BluetoothDevice.ACTION_FOUND);
         registerReceiver(receiver,intent1);
@@ -126,6 +124,10 @@ public class SearchDevices extends AppCompatActivity {
         registerReceiver(receiver,intent2);
     }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 8d4641c8840884c09aa53b7bb330ee6fa54bc362
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.scan_devices_menu,menu);
@@ -145,7 +147,6 @@ public class SearchDevices extends AppCompatActivity {
     private void search_devices(){
         //we need to first clear the adapter with old devices so that we can see the
         //the latest devices which are in range of the device
-
         available_devices_list.clear();
         Toast.makeText(context, "Scanning for devices...", Toast.LENGTH_SHORT).show();
         if(bluetoothAdapter.isDiscovering()){
@@ -153,4 +154,10 @@ public class SearchDevices extends AppCompatActivity {
         }
         bluetoothAdapter.startDiscovery();
     }
+<<<<<<< HEAD
 }
+=======
+
+
+}
+>>>>>>> 8d4641c8840884c09aa53b7bb330ee6fa54bc362
