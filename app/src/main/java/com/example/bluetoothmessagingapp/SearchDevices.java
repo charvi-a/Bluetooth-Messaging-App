@@ -1,6 +1,7 @@
 package com.example.bluetoothmessagingapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.bluetooth.BluetoothAdapter;
@@ -9,6 +10,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -60,6 +63,15 @@ public class SearchDevices extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_devices);
         context = this;
+        // Define ActionBar object
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+
+        // Define ColorDrawable object and parse color
+        // using parseColor method with color hash code as its parameter
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#084DAE"));
+        // Set BackgroundDrawable
+        actionBar.setBackgroundDrawable(colorDrawable);
 
         bonded_devices_list = new ArrayAdapter<String>(context,R.layout.device_list);
         available_devices_list = new ArrayAdapter<String>(context, R.layout.device_list);
@@ -102,7 +114,6 @@ public class SearchDevices extends AppCompatActivity {
             for (BluetoothDevice dev : devices){
                 bonded_devices_list.add(dev.getName() + System.getProperty("line.separator") + dev.getAddress());
             }
-
         }
         else{
             bonded_devices_list.add("No paired devices.");
@@ -114,8 +125,6 @@ public class SearchDevices extends AppCompatActivity {
         IntentFilter intent2 = new IntentFilter(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
         registerReceiver(receiver,intent2);
     }
-
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -138,14 +147,10 @@ public class SearchDevices extends AppCompatActivity {
         //the latest devices which are in range of the device
 
         available_devices_list.clear();
-
         Toast.makeText(context, "Scanning for devices...", Toast.LENGTH_SHORT).show();
         if(bluetoothAdapter.isDiscovering()){
             bluetoothAdapter.cancelDiscovery();
         }
         bluetoothAdapter.startDiscovery();
-
     }
-
-
 }

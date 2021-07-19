@@ -7,6 +7,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,6 +22,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -58,6 +62,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        // Define ActionBar object
+        ActionBar actionBar;
+        actionBar = getSupportActionBar();
+
+        // Define ColorDrawable object and parse color
+        // using parseColor method with color hash code as its parameter
+        ColorDrawable colorDrawable = new ColorDrawable(Color.parseColor("#084DAE"));
+        // Set BackgroundDrawable
+        actionBar.setBackgroundDrawable(colorDrawable);
 
         sendBtn = findViewById(R.id.imageButtonSend);
         msg_edit_text = findViewById(R.id.messagesEditText);
@@ -82,14 +95,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String msg = msg_edit_text.getText().toString();
                 if (msg.length() != 0){
-                    //we need to handle sending and receiving messages using Conversation class
+                    //handle sending and receiving messages using Conversation class
                     map.put("Message",msg);
                     map.put("Receiver",connectedDev);
                     map.put("Sender",blueAdapter.getName());
                     FirebaseDatabase.getInstance().getReference().child("Messages").push().setValue(map);
                     msg_edit_text.setText("");
                     converse.write(msg.getBytes());
-
                 }
             }
         });
@@ -152,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void permission_check(){
-        //we need to check if access is granted or not
+        //check if access is granted or not
         String[] perm = new String[] {Manifest.permission.ACCESS_COARSE_LOCATION};
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED){
             ActivityCompat.requestPermissions(MainActivity.this,perm, RequestCodeLocation );
@@ -175,7 +187,6 @@ public class MainActivity extends AppCompatActivity {
             connect_dev.setVisibility(View.INVISIBLE);
             messages.setVisibility(View.VISIBLE);
         }
-
         super.onActivityResult(requestCode, resultCode, data);
     }
 
@@ -208,7 +219,6 @@ public class MainActivity extends AppCompatActivity {
         else{
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
-
     }
 
     private void enable_bluetooth(){
@@ -221,8 +231,6 @@ public class MainActivity extends AppCompatActivity {
             in.putExtra(BluetoothAdapter.EXTRA_DISCOVERABLE_DURATION,300);
             startActivity(in);
         }
-
-
     }
 
     @Override
