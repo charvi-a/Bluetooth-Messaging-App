@@ -112,6 +112,7 @@ public class Conversation extends AppCompatActivity{
                 Log.e("AcceptThread", "Unable to get a server socket: " + e.toString());
             }
             serverSoc = temp;
+            setState(LISTENING);
         }
 
         public void run(){
@@ -170,6 +171,7 @@ public class Conversation extends AppCompatActivity{
                 Log.e("ThreadConnect", "Unable to create RFCOMM socket: " + e.toString());
             }
             soc = temp;
+            setState(CONNECTING);
         }
 
         public void run(){
@@ -224,6 +226,7 @@ public class Conversation extends AppCompatActivity{
             }
             inputStream = temp_in;
             outputStream = temp_out;
+            setState(CONNECTED);
         }
 
         public void run(){
@@ -277,6 +280,11 @@ public class Conversation extends AppCompatActivity{
         if (connection_thread != null){
             connection_thread.cancel();
             connection_thread = null;
+        }
+        
+        if(accept_thread != null){
+            accept_thread.cancel();
+            accept_thread = null;
         }
 
         if(sendReceive != null){
