@@ -188,9 +188,10 @@ public class Conversation extends AppCompatActivity{
                     soc = (BluetoothSocket) dev.getClass().getMethod("createRfcommSocket", new Class[]{int.class}).invoke(dev, 1);
                     soc.connect();
                 } catch (Exception e2) {
-                    Log.e("", "Couldn't establish Bluetooth connection!");
+                    Log.e("ThreadConnect", "Couldn't establish Bluetooth connection!");
                 }
             }
+            //resetting the connection_thread after completion
             synchronized (Conversation.this){
                 connection_thread =null;
             }
@@ -207,9 +208,9 @@ public class Conversation extends AppCompatActivity{
     }
 
     private class SendReceive extends Thread{
-        private BluetoothSocket socket;
-        private InputStream inputStream;
-        private OutputStream outputStream;
+        private final BluetoothSocket socket;
+        private final InputStream inputStream;
+        private final OutputStream outputStream;
 
         public SendReceive(BluetoothSocket socket){
             this.socket = socket;
@@ -300,6 +301,7 @@ public class Conversation extends AppCompatActivity{
         bundle.putString(MainActivity.TOAST,"Unable to connect to device.");
         msg.setData(bundle);
         handler.sendMessage(msg);
+        setState(NONE)
         //start listening again
         Conversation.this.start();
     }
