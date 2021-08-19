@@ -156,7 +156,7 @@ public class Conversation extends AppCompatActivity{
     //By using a UUID we can listen to the incoming Bluetooth connections and accept them.
     //client side
     private class Connect extends Thread{
-        private BluetoothSocket soc;
+        private final BluetoothSocket soc;
         private final BluetoothDevice dev;
 
         public Connect(BluetoothDevice dev) {
