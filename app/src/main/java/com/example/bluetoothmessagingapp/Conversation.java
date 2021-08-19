@@ -156,7 +156,7 @@ public class Conversation extends AppCompatActivity{
     //By using a UUID we can listen to the incoming Bluetooth connections and accept them.
     //client side
     private class Connect extends Thread{
-        private final BluetoothSocket soc;
+        private BluetoothSocket soc;
         private final BluetoothDevice dev;
 
         public Connect(BluetoothDevice dev) {
@@ -301,7 +301,7 @@ public class Conversation extends AppCompatActivity{
         bundle.putString(MainActivity.TOAST,"Unable to connect to device.");
         msg.setData(bundle);
         handler.sendMessage(msg);
-        setState(NONE)
+        setState(NONE);
         //start listening again
         Conversation.this.start();
     }
