@@ -124,10 +124,6 @@ public class SearchDevices extends AppCompatActivity {
         registerReceiver(receiver,intent2);
     }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 8d4641c8840884c09aa53b7bb330ee6fa54bc362
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.scan_devices_menu,menu);
@@ -154,10 +150,7 @@ public class SearchDevices extends AppCompatActivity {
         }
         bluetoothAdapter.startDiscovery();
     }
-<<<<<<< HEAD
-}
-=======
-
 
 }
->>>>>>> 8d4641c8840884c09aa53b7bb330ee6fa54bc362
+}
+
