@@ -150,7 +150,5 @@ public class SearchDevices extends AppCompatActivity {
         }
         bluetoothAdapter.startDiscovery();
     }
-
-}
 }
 
